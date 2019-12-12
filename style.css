@@ -8,6 +8,8 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    border: 2px dashed grey;
+    border-radius: 50%;
     width: 60vh;
     height: 60vh;
 }
@@ -26,13 +28,49 @@
     font-size: 5rem;
     top: 50%;
     left: 50%;
-    /* border: 2px solid black; */
 }
 
-/* .numbers div:nth-child(1) {
-    transform: translateX(-50%) rotate(30deg);
+.innerClock .center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 4px;
+    height: 4px;
+    background-color: #000;
+    border-radius: 50%;
+    z-index: 4;
 }
 
-.numbers div:nth-child(1)>div {
-    transform: translateX(-50%) rotate(-30deg);
-} */
+.hands>* {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -20%) rotate(0deg);
+    transform-origin: 50% 20%;
+    box-shadow: 3px 3px 4px black;
+    border-radius: 20% 20% 50% 50%;
+}
+
+.hands .hours {
+    width: 3%;
+    height: 45%;
+    transform: translate(-50%, -20%) rotate(30deg);
+    background-color: #222;
+}
+
+.hands .minutes {
+    width: 2%;
+    height: 70%;
+    transform: translate(-50%, -20%) rotate(120deg);
+    background-color: #444;
+    z-index: 2;
+}
+
+.hands .seconds {
+    width: 1%;
+    height: 60%;
+    transform: translate(-50%, -20%) rotate(340deg);
+    background-color: #b32;
+    z-index: 3;
+}
