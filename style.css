@@ -9,6 +9,10 @@ html {
     font-family: 'Bellefair', serif;
 }
 
+body {
+    background-color: #aaa;
+}
+
 .innerClock {
     position: absolute;
     top: 50%;
@@ -28,27 +32,108 @@ html {
     height: 80vh;
     margin: 10vh auto 0;
     /* background-color: #d8e7fa; */
-    background-image: linear-gradient(160deg, #38e4f745, #eff7f7, #e74cff3b);
-    background-size: 1000%;
-    background-position: 0 0;
-    animation: clock-background 60s alternate infinite;
+    animation: clock-background 300s linear infinite;
 }
 
 @keyframes clock-background {
     0% {
-        background-position: 0 0;
+        background-color: hsl(240, 10%, 50%);
     }
 
-    20% {
-        background-position: 0 0;
+    2.78% {
+        background-color: hsl(240, 45%, 25%);
     }
 
-    80% {
-        background-position: 100% 100%;
+    8.33% {
+        background-color: hsl(240, 45%, 25%);
+    }
+
+    11.11% {
+        background-color: hsl(240, 10%, 50%);
+    }
+
+    16.67% {
+        background-color: hsla(180, 10%, 50%, 1);
+    }
+
+    19.44% {
+        background-color: hsla(180, 45%, 25%, 1);
+    }
+
+    25% {
+        background-color: hsla(180, 45%, 25%, 1);
+    }
+
+    27.77% {
+        background-color: hsla(180, 10%, 50%, 1);
+    }
+
+    33.33% {
+        background-color: hsl(120, 10%, 50%);
+    }
+
+    36.11% {
+        background-color: hsl(120, 45%, 25%);
+    }
+
+    41.66% {
+        background-color: hsl(120, 45%, 25%);
+    }
+
+    44.44% {
+        background-color: hsl(120, 10%, 50%);
+    }
+
+    49.99% {
+        background-color: hsla(60, 10%, 50%, 1);
+    }
+
+    52.77% {
+        background-color: hsla(60, 45%, 25%, 1);
+    }
+
+    58.33% {
+        background-color: hsla(60, 45%, 25%, 1);
+    }
+
+    61.11% {
+        background-color: hsla(60, 10%, 50%, 1);
+    }
+
+    66.66% {
+        background-color: hsl(0, 10%, 50%);
+    }
+
+    69.44% {
+        background-color: hsl(0, 45%, 25%);
+    }
+
+    75% {
+        background-color: hsl(0, 45%, 25%);
+    }
+
+    77.78% {
+        background-color: hsl(0, 10%, 50%);
+    }
+
+    83.34% {
+        background-color: hsla(300, 10%, 50%, 1);
+    }
+
+    86.09% {
+        background-color: hsla(300, 45%, 25%, 1);
+    }
+
+    91.65% {
+        background-color: hsla(300, 45%, 25%, 1);
+    }
+
+    97.21% {
+        background-color: hsla(300, 10%, 50%, 1);
     }
 
     100% {
-        background-position: 100% 100%;
+        background-color: hsl(240, 10%, 50%);
     }
 }
 
