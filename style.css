@@ -137,8 +137,6 @@ body {
     }
 }
 
-
-
 .numbers div {
     position: absolute;
     font-size: 5rem;
@@ -189,4 +187,5 @@ body {
     transform: translate(-50%, -20%) rotate(340deg);
     background-color: #b32;
     z-index: 3;
+    transition: transform .05s linear;
 }

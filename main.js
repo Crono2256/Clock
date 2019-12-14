@@ -29,7 +29,53 @@ function refreshClock() {
     placeDigits();
 }
 
-refreshClock();
+function initiateMove() {
+    const hoursHand = document.querySelector('.hands .hours');
+    const minutesHand = document.querySelector('.hands .minutes');
+    const secondsHand = document.querySelector('.hands .seconds');
 
+    let secRotation = 120;
+    let minRotation = 180;
+    let hourRotation = 60;
+
+    // starting position of hands
+    secondsHand.style.transform = `translate(-50%, -20%) rotate(${secRotation}deg)`;
+    minutesHand.style.transform = `translate(-50%, -20%) rotate(${minRotation}deg)`;
+    hoursHand.style.transform = `translate(-50%, -20%) rotate(${hourRotation}deg)`;
+
+    function secondsHandMove() {
+        secRotation += 360 / 60;
+        secondsHand.style.transform = `translate(-50%, -20%) rotate(${secRotation}deg)`;
+        // console.log(secRotation);
+    }
+
+    function minutesHandMove() {
+        minRotation += 360 / 60;
+        minutesHand.style.transform = `translate(-50%, -20%) rotate(${minRotation}deg)`;
+    }
+
+    function hoursHandMove() {
+        console.log('godzina przesuwa się')
+        hourRotation += 360 / 60 / 12;
+        hoursHand.style.transform = `translate(-50%, -20%) rotate(${hourRotation}deg)`;
+    }
+
+    // move hands every second
+    function handsMove() {
+        // console.log('ruch wskazówek');
+        secondsHandMove();
+        if ((secRotation + 180) % 360 == 0) {
+            minutesHandMove();
+            hoursHandMove();
+        }
+    }
+
+    return handsMove;
+}
+
+refreshClock();
+const clockStart = initiateMove();
+// initiateMove();
+setInterval(clockStart, 1000);
 
 window.addEventListener('resize', refreshClock);
