@@ -26,12 +26,12 @@ body {
 
 .outerClock {
     position: relative;
-    border: 25px solid black;
+    border: 0 solid black;
+    box-shadow: 0 0 8px 4px;
     border-radius: 50%;
     width: 80vh;
     height: 80vh;
     margin: 10vh auto 0;
-    /* background-color: #d8e7fa; */
     animation: clock-background 300s linear infinite;
 }
 

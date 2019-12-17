@@ -27,7 +27,7 @@ function refreshClock() {
     }
 
     function resizeBorder() {
-        let size = innerClockRadius * 0.12;
+        let size = innerClockRadius * 0.08;
         outerClock.style.borderWidth = size + 'px';
     }
 
