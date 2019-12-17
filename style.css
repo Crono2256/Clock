@@ -187,5 +187,16 @@ body {
     transform: translate(-50%, -20%) rotate(340deg);
     background-color: #b32;
     z-index: 3;
-    /* transition: transform .05s linear; */
+}
+
+/* minutes bars */
+
+.bar {
+    position: absolute;
+    top: -18%;
+    left: calc(50% - 1px);
+    background-color: #000;
+    width: 1px;
+    height: 2vh;
+    transform-origin: 0 41vh;
 }
