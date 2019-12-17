@@ -1,10 +1,12 @@
-const digits = [...document.querySelectorAll('.numbers>div')];
-const innerClock = document.querySelector('.innerClock');
-const outerClock = document.querySelector('.outerClock');
-
 function refreshClock() {
+    const digits = [...document.querySelectorAll('.numbers>div')];
+    const innerClock = document.querySelector('.innerClock');
+    const outerClock = document.querySelector('.outerClock');
+
+    // calculate clock radius
     const innerClockRadius = innerClock.clientWidth / 2;
 
+    // change size of digits and border along with change of whole's clock size
     function resizeDigits() {
         let size = innerClockRadius * 0.4;
         digits.forEach(digit => digit.style.fontSize = `${size}px`)
@@ -15,6 +17,7 @@ function refreshClock() {
         outerClock.style.borderWidth = size + 'px';
     }
 
+    // function placing digits around the clock properly
     function placeDigits() {
         let degrees = Math.PI / 3;
 
@@ -29,24 +32,24 @@ function refreshClock() {
     placeDigits();
 }
 
-function initiateMove() {
+function initiateMove(hrs = 0, mins = 0, secs = 0) {
     const hoursHand = document.querySelector('.hands .hours');
     const minutesHand = document.querySelector('.hands .minutes');
     const secondsHand = document.querySelector('.hands .seconds');
 
-    let secRotation = 120;
-    let minRotation = 180;
-    let hourRotation = 60;
+    // starting position of hands depending on current time
+    let secRotation = (360 / 60) * secs + 180;
+    let minRotation = (360 / 60) * mins + 180;
+    let hourRotation = (360 / 12) * hrs + (360 / 12 / 60) * mins + 180;
 
-    // starting position of hands
     secondsHand.style.transform = `translate(-50%, -20%) rotate(${secRotation}deg)`;
     minutesHand.style.transform = `translate(-50%, -20%) rotate(${minRotation}deg)`;
     hoursHand.style.transform = `translate(-50%, -20%) rotate(${hourRotation}deg)`;
 
+    // move hands - functions
     function secondsHandMove() {
         secRotation += 360 / 60;
         secondsHand.style.transform = `translate(-50%, -20%) rotate(${secRotation}deg)`;
-        // console.log(secRotation);
     }
 
     function minutesHandMove() {
@@ -55,14 +58,12 @@ function initiateMove() {
     }
 
     function hoursHandMove() {
-        console.log('godzina przesuwa się')
         hourRotation += 360 / 60 / 12;
         hoursHand.style.transform = `translate(-50%, -20%) rotate(${hourRotation}deg)`;
     }
 
-    // move hands every second
+    // call out functions every second
     function handsMove() {
-        // console.log('ruch wskazówek');
         secondsHandMove();
         if ((secRotation + 180) % 360 == 0) {
             minutesHandMove();
@@ -73,9 +74,15 @@ function initiateMove() {
     return handsMove;
 }
 
+const currTime = new Date();
+
 refreshClock();
-const clockStart = initiateMove();
-// initiateMove();
+
+// transfer data about current time to initiateMove function in order to set starting position of hands
+const clockStart = initiateMove(currTime.getHours() > 12 ? currTime.getHours() - 12 : currTime.getHours(), currTime.getMinutes(), currTime.getSeconds());
+
+// move seconds hand every second
 setInterval(clockStart, 1000);
 
+// event on size change of clock
 window.addEventListener('resize', refreshClock);
