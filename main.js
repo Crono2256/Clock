@@ -3,22 +3,34 @@ function refreshClock() {
     const innerClock = document.querySelector('.innerClock');
     const outerClock = document.querySelector('.outerClock');
 
-    // add minutes bars around the clock
-    let barRotation = 0;
-    for (let i = 0; i < 60; i++) {
-        const clockBar = document.createElement('div');
-        clockBar.classList.add('bar');
-        if (i % 5 == 0) {
-            clockBar.style.height = '3vh';
-            clockBar.style.width = '2px';
-        }
-        clockBar.style.transform = `rotate(${barRotation}deg)`;
-        barRotation += 6;
-        innerClock.appendChild(clockBar);
-    }
-
     // calculate clock radius
     const innerClockRadius = innerClock.clientWidth / 2;
+
+    // add minutes bars around the clock
+    function placeBars() {
+
+        let barRotation = 0;
+
+        for (let i = 0; i < 60; i++) {
+            const clockBar = document.createElement('div');
+            innerClock.appendChild(clockBar);
+            clockBar.classList.add('bar');
+            clockBar.style.transformOrigin = `-50% calc(1.36 * ${innerClockRadius}px`;
+            clockBar.style.transform = `rotate(${barRotation}deg)`;
+            barRotation += 6;
+            if (i % 5 == 0) {
+                clockBar.style.height = '3vh';
+                clockBar.style.width = '2px';
+            }
+        }
+    }
+
+    function updateBars() {
+        document.querySelectorAll('.bar').forEach((bar, i) => {
+            bar.style.transformOrigin = `-50% calc(1.36 * ${innerClockRadius}px`;
+            if (i == 30) console.log(bar.style.transformOrigin)
+        })
+    }
 
     // change size of digits and border along with change of whole's clock size
     function resizeDigits() {
@@ -44,6 +56,8 @@ function refreshClock() {
     resizeDigits();
     resizeBorder();
     placeDigits();
+    updateBars();
+    return placeBars;
 }
 
 function initiateMove(hrs = 0, mins = 0, secs = 0) {
@@ -90,7 +104,8 @@ function initiateMove(hrs = 0, mins = 0, secs = 0) {
 
 const currTime = new Date();
 
-refreshClock();
+const barsFunction = refreshClock();
+barsFunction();
 
 // transfer data about current time to initiateMove function in order to set starting position of hands
 const clockStart = initiateMove(currTime.getHours() > 12 ? currTime.getHours() - 12 : currTime.getHours(), currTime.getMinutes(), currTime.getSeconds());
