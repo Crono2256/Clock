@@ -1,7 +1,18 @@
+const bgChange = document.querySelector('.bg');
+const colors = document.querySelectorAll('.colors li');
+const outerClock = document.querySelector('.outerClock');
+
+function changeColorOptions() {
+    bgChange.classList.toggle('active');
+    colors.forEach(function (color, i) {
+        if (bgChange.classList.contains('active')) color.style.bottom = (-100) * (i + 1) + "%";
+        else color.style.bottom = 0;
+    })
+}
+
 function refreshClock() {
     const digits = [...document.querySelectorAll('.numbers>div')];
     const innerClock = document.querySelector('.innerClock');
-    const outerClock = document.querySelector('.outerClock');
 
     // calculate clock radius
     const innerClockRadius = innerClock.clientWidth / 2;
@@ -28,7 +39,6 @@ function refreshClock() {
     function updateBars() {
         document.querySelectorAll('.bar').forEach((bar, i) => {
             bar.style.transformOrigin = `-50% calc(1.36 * ${innerClockRadius}px`;
-            if (i == 30) console.log(bar.style.transformOrigin)
         })
     }
 
@@ -102,6 +112,13 @@ function initiateMove(hrs = 0, mins = 0, secs = 0) {
     return handsMove;
 }
 
+function styleButtons() {
+    colors.forEach(function (color) {
+        color.style.backgroundColor = color.dataset.color;
+        if (color.dataset.bright == 'light') color.style.color = 'black';
+    })
+}
+
 const currTime = new Date();
 
 const barsFunction = refreshClock();
@@ -113,5 +130,25 @@ const clockStart = initiateMove(currTime.getHours() > 12 ? currTime.getHours() -
 // move seconds hand every second
 setInterval(clockStart, 1000);
 
+styleButtons();
+
+// EVENTS
+
 // event on size change of clock
 window.addEventListener('resize', refreshClock);
+
+// click events
+bgChange.addEventListener('click', changeColorOptions);
+
+// background change
+colors.forEach((color) => {
+    color.addEventListener('click', function () {
+        if (this.classList.contains('animation')) {
+            console.log(this);
+            outerClock.style.animation = 'clock-background 300s linear infinite';
+        } else {
+            outerClock.style.backgroundColor = this.dataset.color;
+            outerClock.style.animation = '';
+        }
+    })
+});
